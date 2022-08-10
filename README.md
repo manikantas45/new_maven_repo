@@ -1,10 +1,5 @@
 New changes done by developer
 
-some more changes dondddddddeddd
-
-
-cccccc
-ddd
-eee
+some more changes 
 
 
