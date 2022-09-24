@@ -19,12 +19,33 @@ pipeline {
       }
 	}
 	
-	stage ('Build Package') {
+
+  
+    stage('Scan') {
+      steps {
+        withSonarQubeEnv(installationName: 'SonarQube') { 
+          sh 'mvn clean package sonar:sonar'
+        }
+      }
+    
+
+   }
+   stage("Quality Gate") {
+      steps {
+        timeout(time: 2, unit: 'MINUTES') {
+          waitForQualityGate abortPipeline: true
+        }
+      }
+    }
+   
+   stage ('Build Package') {
 
             steps {
                sh 'mvn clean package'
             }
         }
+        
+        
     stage('Building image') {
       steps{
         script {
@@ -42,14 +63,8 @@ pipeline {
           }
         }
       }
-    }
-	 stage('Deploying App to Kubernetes') {
-      steps {
-        script {
-          kubernetesDeploy(configs: "k8s-deployment-service.yaml", kubeconfigId: "kubernetes-deployment")
-        }
-      }
-    }
+     }
+	
 	
   }
 } 
