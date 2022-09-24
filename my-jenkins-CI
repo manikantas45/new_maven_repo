@@ -8,6 +8,7 @@ pipeline {
     }
 	tools{
         maven 'MAVEN_HOME'
+	java 'JAVA_HOME'
     }
   agent {
   label 'my-docker-slave'
