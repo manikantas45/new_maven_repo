@@ -1,8 +1,8 @@
 pipeline {
   environment {
-    dockerimagename = "vijaylokesh/my-tomcat"
+    dockerimagename = "coolguy258/my-private-repo"
     registry = "https://hub.docker.com/"
-    registryCredential = 'my-docker-private-id'
+    registryCredential = 'docker-credentials'
     dockerImage = ""	  
 	  
     }
